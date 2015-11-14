@@ -1,6 +1,6 @@
 #SHIAlertView
 
-##Easy USe it !
+##Easy Use it !
 
 ###one Button type
 
@@ -30,6 +30,6 @@ two Button type
 `[[SHIAlertView sharedView]showTitle:@"Title" descreption:@"Descreption" buttonTitle:@"OK" otherTitle:@"Two"];`
 
 
-###two button type
+###make this
 
   <img src="http://shi-chimi.com/gitmd/2.png" width="30%" height="30%">
