@@ -63,7 +63,6 @@
             [[SHIAlertView sharedView]showTitle:@"Title" descreption:@"Descreption" buttonTitle:@"OK"];
             [SHIAlertView sharedView].tag = 2;
             break;
-        
         case 1:
             [[SHIAlertView sharedView]showTitle:@"Title" descreption:@"Descreption" buttonTitle:@"OK" otherTitle:@"Two"];
             break;

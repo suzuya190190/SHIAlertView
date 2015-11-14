@@ -10,6 +10,8 @@
 	<string>SHIAlertView</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>1D23D9B8D61D8C1DB76DEB9D953CD500B86DBECC</key>
+		<string>https://github.com/keisukeYamagishi/SHIAlertView.git</string>
 		<key>EA1189656438694A918E6FCCFC04CFE2866C37A2</key>
 		<string>ssh://160.16.86.88:9765/home/tomyami/git_st/alert.git</string>
 	</dict>
@@ -17,17 +19,27 @@
 	<string>SHIAlertView.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>EA1189656438694A918E6FCCFC04CFE2866C37A2</key>
+		<key>1D23D9B8D61D8C1DB76DEB9D953CD500B86DBECC</key>
 		<string>../..</string>
+		<key>EA1189656438694A918E6FCCFC04CFE2866C37A2</key>
+		<string>../../../SHIAlertView</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://160.16.86.88:9765/home/tomyami/git_st/alert.git</string>
+	<string>https://github.com/keisukeYamagishi/SHIAlertView.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>EA1189656438694A918E6FCCFC04CFE2866C37A2</string>
+	<string>1D23D9B8D61D8C1DB76DEB9D953CD500B86DBECC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1D23D9B8D61D8C1DB76DEB9D953CD500B86DBECC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ALERt</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

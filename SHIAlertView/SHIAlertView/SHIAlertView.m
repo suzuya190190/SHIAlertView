@@ -17,7 +17,9 @@
 
 static SHIAlertView* shialert=nil;
 
-#define BUTTON_HEIGHT 40
+#define BUTTON_HIDE_LINE 1
+#define BUTTON_HEIGHT 50
+
 static CGFloat baseViewheght = 0;
 
 @implementation SHIAlertView
@@ -76,7 +78,7 @@ static CGFloat baseViewheght = 0;
     _title = [[SHILable alloc]initWithFrameTitle:CGRectMake(0, 10, 300, 40)];
     [_baseView addSubview:_title];
     _title.text = title;
-    _message = [[SHILable alloc]initWithFrameDescreption:CGRectMake(0, 60, _baseView.frame.size.width, 60)];
+    _message = [[SHILable alloc]initWithFrameDescreption:CGRectMake(0, 50, _baseView.frame.size.width, 60)];
     
     NSInteger numberLine = numberOfHeight(descreption);
     
@@ -84,7 +86,7 @@ static CGFloat baseViewheght = 0;
     _message.numberOfLines = numberLine;
     
     if(numberLine>=4){
-        baseViewheght = numberLine*12;
+        baseViewheght = numberLine*13;
         _message.frame = CGRectMake(_message.frame.origin.x,_message.frame.origin.y,_message.frame.size.width,_message.frame.size.height+(numberLine*20));
         
         _baseView.frame = CGRectMake(_baseView.frame.origin.x, _baseView.frame.origin.y-20, _baseView.frame.size.width, _baseView.frame.size.height+(numberLine*12));
@@ -140,8 +142,6 @@ NSInteger numberOfHeight(NSString* str){
  *  @param otherButton <#otherButton description#>
  */
 -(void)showTitle:(NSString*)title descreption:(NSString*)descreption buttonTitle:(NSString*)buttonTitle otherTitle:(NSString*)otherButton{
-    
-    NSLog(@"%ld",descreption.length);
     
     [self initializeView:title descreption:descreption];
     
@@ -212,9 +212,9 @@ NSInteger numberOfHeight(NSString* str){
 -(void)showTile:(NSString*)title message:(NSString*)message delegate:(id)delegate {
     _title = [[SHILable alloc]initWithFrameTitle:CGRectMake(0, 10, 300, 40)];
     [_baseView addSubview:_title];
-    _title.text = @"title";
+    _title.text = @"";
     _message = [[SHILable alloc]initWithFrameDescreption:CGRectMake(0, 80, _baseView.frame.size.width, 60)];
-    _message.text = @"Descreption";
+    _message.text = @"";
     [_baseView addSubview:_message];
 }
 
@@ -231,30 +231,28 @@ NSInteger divisionNumbe(NSInteger num){
         _but = setButton(_but, i);
         
         switch (butttonTitle.count){
-            case 1: _but.frame = CGRectMake(0, _baseView.frame.size.width-100+baseViewheght, _baseView.frame.size.width, 50);
+            case 1: _but.frame = CGRectMake(-BUTTON_HIDE_LINE, _baseView.frame.size.width-100+baseViewheght, _baseView.frame.size.width+2, 51);
                 break;
-            case 2: _but.frame = CGRectMake((divisionNumbe(_baseView.frame.size.width)*i),  _baseView.frame.size.width-100+baseViewheght, divisionNumbe(_baseView.frame.size.width), 50);
+            case 2: _but.frame = CGRectMake((divisionNumbe(_baseView.frame.size.width)*i)-1,  _baseView.frame.size.width-100+baseViewheght, divisionNumbe(_baseView.frame.size.width)+1.5, 50+BUTTON_HIDE_LINE);
                 
                 break;
             case 3:{
-                _but.frame = CGRectMake(10,  (_baseView.frame.size.width-(BUTTON_HEIGHT*2))+(i*(BUTTON_HEIGHT+10))+baseViewheght, _baseView.frame.size.width-20, BUTTON_HEIGHT);
+                //_but.frame = CGRectMake(-1,  (_baseView.frame.size.width-(BUTTON_HEIGHT*2))+(i*(BUTTON_HEIGHT+10))+baseViewheght, _baseView.frame.size.width+2, BUTTON_HEIGHT);
+                _but.frame = CGRectMake(-1,  _baseView.frame.size.width-(BUTTON_HEIGHT*(3-i))+baseViewheght, _baseView.frame.size.width+2, BUTTON_HEIGHT);
                 
-                NSLog(@"%@",NSStringFromCGRect(_but.frame));
-                
-                _baseView.frame = CGRectMake(_baseView.frame.origin.x, _baseView.frame.origin.y-20+baseViewheght, _baseView.frame.size.width, _baseView.frame.size.height+(BUTTON_HEIGHT));
+                _baseView.frame = CGRectMake(_baseView.frame.origin.x, _baseView.frame.origin.y-20, _baseView.frame.size.width, _baseView.frame.size.height+16);
             }
                 break;
             case 4:{
-                _but.frame = CGRectMake(10,  (_baseView.frame.size.width-(BUTTON_HEIGHT*2))+(i*(BUTTON_HEIGHT+10))+baseViewheght, _baseView.frame.size.width-20, BUTTON_HEIGHT);
+                //_but.frame = CGRectMake(10,  (_baseView.frame.size.width-(BUTTON_HEIGHT*2))+(i*(BUTTON_HEIGHT+10))+baseViewheght, _baseView.frame.size.width-20+BUTTON_HIDE_LINE, BUTTON_HEIGHT);
+                _but.frame = CGRectMake(-1,  _baseView.frame.size.width-(BUTTON_HEIGHT*(4-i))+(baseViewheght+30)+15, _baseView.frame.size.width+2, BUTTON_HEIGHT);
                 
-                _baseView.frame = CGRectMake(_baseView.frame.origin.x, _baseView.frame.origin.y-20, _baseView.frame.size.width, _baseView.frame.size.height+(BUTTON_HEIGHT));
-                
-                NSLog(@"%@",NSStringFromCGRect(_but.frame));
-            }break;
+                _baseView.frame = CGRectMake(_baseView.frame.origin.x, _baseView.frame.origin.y-20, _baseView.frame.size.width, _baseView.frame.size.height+30);
+                }break;
             case 5:{
-                _but.frame = CGRectMake(10,  (_baseView.frame.size.width-(BUTTON_HEIGHT*2))+(i*(BUTTON_HEIGHT+10))+baseViewheght, _baseView.frame.size.width-20, BUTTON_HEIGHT);
-                
-                _baseView.frame = CGRectMake(_baseView.frame.origin.x, _baseView.frame.origin.y-20, _baseView.frame.size.width, _baseView.frame.size.height+(BUTTON_HEIGHT+5));
+                //_but.frame = CGRectMake(10,  (_baseView.frame.size.width-(BUTTON_HEIGHT*2))+(i*(BUTTON_HEIGHT+10))+baseViewheght, _baseView.frame.size.width-20+BUTTON_HIDE_LINE, BUTTON_HEIGHT);
+                _but.frame = CGRectMake(-1,  _baseView.frame.size.width-(BUTTON_HEIGHT*(4-i))+baseViewheght+45, _baseView.frame.size.width+2, BUTTON_HEIGHT);
+                _baseView.frame = CGRectMake(_baseView.frame.origin.x, _baseView.frame.origin.y-20, _baseView.frame.size.width, _baseView.frame.size.height+30);
             }break;
                 
             default:

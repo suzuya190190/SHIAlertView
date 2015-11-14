@@ -24,8 +24,8 @@
 
 SHIButton* setButton(SHIButton* but, NSInteger i){
     but.tag = i;
-    but.clipsToBounds = YES;
-    but.layer.cornerRadius = 20;
+    but.layer.borderColor = [UIColor grayColor].CGColor;
+    but.layer.borderWidth = 0.5f;
     return but;
 }
 
