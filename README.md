@@ -4,6 +4,6 @@ Easy USe it !
 
 one Button type
 
-![](http://shi-chimi.com/gitmd/1.png)
+<img src="http://shi-chimi.com/gitmd/1.png" width="50%" height="50%">
 
 
