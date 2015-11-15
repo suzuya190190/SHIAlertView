@@ -9,10 +9,18 @@
 #import "SHIAlertView.h"
 #import "SHIColorSixteen.h"
 #import "SHIButton.h"
-
+#define DISTINATION(angle) ((angle) / 180.0 * M_PI)
 @interface SHIAlertView ()
 @property(nonatomic,retain,readonly)UIWindow* overrayWindow;
 @property(nonatomic,strong)SHIButton* but;
+
+/**
+ *  animation
+ */
+@property (nonatomic, strong) UIDynamicAnimator       *animator;
+@property (nonatomic, strong) UIAttachmentBehavior    *attachmentBehavior;
+@property (nonatomic, strong) UIGravityBehavior       *gravityBehavior;
+
 @end
 
 static SHIAlertView* shialert=nil;
@@ -195,19 +203,64 @@ NSInteger numberOfHeight(NSString* str){
                          _title.transform = CGAffineTransformScale(_title.transform, 1, 1);
                          _message.transform = CGAffineTransformScale(_message.transform, 1, 1);
                      } completion:^(BOOL finished) {
-                         _baseView.transform = CGAffineTransformScale(_baseView.transform, 0, 0);
-                         _title.transform = CGAffineTransformScale(_title.transform, 0, 0);
-                         _message.transform = CGAffineTransformScale(_message.transform, 0, 0);
-                         overrayWindow = nil;
-                         [overrayWindow removeFromSuperview];
-                         [_baseView removeFromSuperview];
-                         [_title removeFromSuperview];
-                         [_message removeFromSuperview];
-                         shialert = nil;
-
+                         [self removeFromSubview];
                      }];
 }
 
+-(void)fadeAnimation{
+    [UIView animateWithDuration:1.0
+                          delay:0
+                        options:(UIViewAnimationOptions)(UIViewAnimationCurveEaseIn) animations:^(){
+                            _baseView.alpha = 0;
+                            _title.alpha = 0;
+                            _message.alpha = 0;
+                            
+                        } completion:^(BOOL finshed){
+                            [self removeFromSubview];
+                        }];
+}
+
+-(void)removeFromSubview{
+    overrayWindow = nil;
+    shialert= nil;
+    [_baseView removeFromSuperview];
+    [_title removeFromSuperview];
+    [_message removeFromSuperview];
+}
+
+-(void)minimumFadeAnimation{
+    [UIView animateWithDuration:1.0
+                          delay:0
+                        options:(UIViewAnimationOptions)(UIViewAnimationCurveEaseIn) animations:^(){
+                            _title.frame = CGRectMake(overrayWindow.center.x , overrayWindow.center.y, 0, 0);
+                            _message.frame = CGRectMake(overrayWindow.center.x, overrayWindow.center.y, 0, 0);
+                            _baseView.frame = CGRectMake(overrayWindow.center.x , overrayWindow.center.y, 0, 0);
+                            _but.frame = CGRectMake(overrayWindow.center.x , overrayWindow.center.y, 0, 0);
+                            _title.alpha = 0;
+                            _message.alpha = 0;
+                            _baseView.alpha = 0;
+                            _but.alpha = 0;
+                        } completion:^(BOOL finshed){
+                            [self removeFromSubview];
+                        }];
+}
+
+-(void)gravivityAnimation{
+    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:_baseView];
+    CGPoint squareCenterPoint                = CGPointMake(CGRectGetMaxX(_baseView.frame), CGRectGetMinY(_baseView.frame));
+    UIOffset attachmentPoint                 = UIOffsetMake(CGRectGetMinX(_baseView.frame), CGRectGetMaxY(_baseView.frame));
+    UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:_baseView offsetFromCenter:attachmentPoint attachedToAnchor:squareCenterPoint];
+    [_animator addBehavior:attachmentBehavior];
+    self.attachmentBehavior                  = attachmentBehavior;
+    
+    UIGravityBehavior *gravityBeahvior = [[UIGravityBehavior alloc] initWithItems:@[_baseView]];
+    gravityBeahvior.magnitude          = 4;
+    gravityBeahvior.angle              = DISTINATION(100);
+    [self.animator addBehavior:gravityBeahvior];
+    self.gravityBehavior               = gravityBeahvior;
+    
+    [self performSelector:@selector(removeFromSubview) withObject:_baseView afterDelay:0.7];
+}
 
 -(void)showTile:(NSString*)title message:(NSString*)message delegate:(id)delegate {
     _title = [[SHILable alloc]initWithFrameTitle:CGRectMake(0, 10, 300, 40)];
